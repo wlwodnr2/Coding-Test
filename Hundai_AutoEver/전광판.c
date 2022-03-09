@@ -3,6 +3,8 @@
 #include <string.h> 
 #include <math.h>
 
+// 전광판에 있는 숫자들을 비트로 표현하는 것이 중요했다. 
+
 int ft_intlength(int number)
 {
 	int count;
