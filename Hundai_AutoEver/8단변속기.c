@@ -1,3 +1,5 @@
+//Runing_Time 10m 23s
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
