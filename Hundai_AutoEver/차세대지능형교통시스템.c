@@ -26,13 +26,13 @@ void countingCross(int X, int Y, int direct, int Timer) {
 	while (front < rear) {
 		for (int k = 0; k < 4; k++) {
 			int possible = 0;
-			if (queue[front][3] == Timer) break;
-			int nx = queue[front][0] + dx[k], ny = queue[front][1] + dy[k];
-			if (nx<1 || ny<1 || nx>N || ny>N || check[nx][ny] == 1) continue; //네 방향 중 갈 수 있는 곳 
+			if (queue[front][3] == Timer) break; //Time Over
+			int nx = queue[front][0] + dx[k], ny = queue[front][1] + dy[k]; //갈 수 있는 방향 체크 
+			if (nx<1 || ny<1 || nx>N || ny>N || check[nx][ny] == 1) continue; //갈 수 없거나 이미 지나간 곳이면 continue 
 			for (int i = 0; i < 4; i++) {
-				if (CrossRoad[queue[front][0]][queue[front][1]][i]%4 != queue[front][2]) continue; //방향 같은게 신호등에 있는가
-				if (signal[CrossRoad[queue[front][0]][queue[front][1]][i] - 1][k] == 0) continue; //가려는 방향의 신호등이 켜져 있는가 확인
-				possible = 1; //가도 된다.
+				if (CrossRoad[queue[front][0]][queue[front][1]][i]%4 != queue[front][2]) continue; //방향 같은 것이 있는가 ? Up, Down, Right, Left 확인
+				if (signal[CrossRoad[queue[front][0]][queue[front][1]][i] - 1][k] == 0) continue; //방향이 같다면 가려는 방향의 신호등이 켜져 있는가 확인, k는 하우상좌 중에 
+				possible = 1; //만약 가려는 방향이 신호등에 포함 된다면 
 			}
 			if (possible == 1) {
 				queue[rear][0] = nx;
@@ -67,7 +67,30 @@ int main(void)
 		}
 	}
 
-	countingCross(1,1,2,T);
+	countingCross(1,1,2,T); //시작 1,1 T = 3;
 
 	return 0;
 }
+
+/*
+예제 )
+4 4
+2 6 12 9
+7 1 11 6
+6 3 5 11
+6 3 5 11
+1 1 12 9
+3 11 8 2
+1 7 11 9
+1 7 11 9
+4 6 2 3
+2 4 2 4
+6 9 2 6
+6 9 2 6
+4 6 2 3
+2 4 2 4
+6 9 2 6
+6 9 2 6
+
+답 : 11
+*/
