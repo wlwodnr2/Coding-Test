@@ -1,5 +1,3 @@
-//Algo tutor 선생님 설명대로 코딩 했는데 틀렸습니다가 뜬다..
-
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
