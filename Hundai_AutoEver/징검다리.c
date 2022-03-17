@@ -5,18 +5,18 @@
 
 int main(void)
 {
-	int N, A[3001] = { 0, }, rocks[3001] = {0, }, Max_Count = 0;
+	int N, A[3001] = { 0, }, rocks[3001] = { 0, }, Max_Count = 1;
 	scanf("%d", &N);
 
 	for (int i = 0; i < N; i++) {
 		scanf("%d", &A[i]);
-		rocks[i] = 1; 
+		rocks[i] = 1;
 	}
-	
+
 	for (int i = 1; i < N; i++) {
 		int count = 1;
 		for (int j = 0; j < i; j++) {
-			if (A[i] > A[j] && (rocks[j] +1 > count)) {
+			if (A[i] > A[j] && (rocks[j] + 1 > count)) {
 				count = rocks[j] + 1;
 				rocks[i] = count;
 			}
