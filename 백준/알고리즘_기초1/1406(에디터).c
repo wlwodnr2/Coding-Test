@@ -10,15 +10,11 @@ typedef struct LinkedList {
 }LinkedList;
 
 int main(void) {
-	int L, cursor;
+	int L;
 	char data, command, Pword;
-	//LinkedList* head = NULL;
-	//LinkedList* tail = NULL;
-	//LinkedList* cur = NULL;
-	//LinkedList* newNode = NULL;
 
 	LinkedList* head = (LinkedList*)malloc(sizeof(LinkedList));
-	head->word = '!';
+	head->word = NULL;
 	head->before = head->next = NULL;
 	LinkedList* cur = head;
 
@@ -42,34 +38,33 @@ int main(void) {
 				newNode->word = Pword;
 				newNode->next = NULL;
 				newNode->before = cur;
-				if (cur->next) {
+				if (cur->next != NULL) {
 					newNode->next = cur->next;
 					cur->next->before = newNode;
 				}
-				else {
-					newNode->next = NULL;
-				}
 				cur->next = newNode;
-				cur = cur->next;
+				cur = newNode; 
 				break;
 			case 'L':
-				if (cur->before) cur = cur->before;
+				if (cur->before != NULL) cur = cur->before; //맨 앞이 아니라면 
 				break;
 			case 'D':
-				if (cur->next) cur = cur->next;
+				if (cur->next != NULL) cur = cur->next; //맨 끝이 아니라면 
 				break;
 			case 'B':
-				if (cur->before == NULL) continue;
-				LinkedList* del = (LinkedList*)malloc(sizeof(LinkedList));
-				del = cur;
-				cur = del->before;
-				if (del->next) {
-					cur->next = del->next;
-					del->next->before = cur;
-					del->before = NULL;
+				if (cur->before == NULL) continue; //맨 앞이면 삭제 못 함 
+				LinkedList* delNode = (LinkedList*)malloc(sizeof(LinkedList));
+				delNode = cur; 
+				cur = delNode->before;
+				if (delNode->next != NULL) {
+					cur->next = delNode->next;
+					delNode->next->before = cur;
+					delNode->before = NULL;
 				}
-				else { cur->next = NULL; }
-				free(del);
+				else {
+					cur->next = NULL;
+				}
+				free(delNode);
 				break;
 		}
   	}
