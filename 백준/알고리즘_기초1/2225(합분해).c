@@ -1,3 +1,7 @@
+/*
+
+시간 12ms 
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #define MOD 1000000000
@@ -19,5 +23,27 @@ int main() {
 		}
 	}
 	printf("%d", arr[N][K]%MOD);
+	return 0;
+}
+*/
+
+// 시간 0ms 
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#define MOD 1000000000
+int main() {
+	int N, K, arr[201][201] = {0,}; //arr[N 값][정수 K개수]
+	scanf("%d %d", &N, &K);
+	
+	for (int i = 1; i <= N; i++) {
+		arr[i][1] = 1; //일단 K = 1인 경우는 다 1개 
+	}
+	for (int i = 1; i <= N; i++) { //값은 1부터
+		for (int j = 2; j <= K; j++) { //개수 2개부터
+			if (i == 1) arr[i][j] = arr[i][j - 1] + 1;
+			else arr[i][j] = (arr[i - 1][j] + arr[i][j - 1]) % MOD;
+		}
+	}
+	printf("%d", arr[N][K]);
 	return 0;
 }
