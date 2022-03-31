@@ -18,30 +18,29 @@ void heap_sort(int* arr, int N) {
 }
 
 int main() {
-	int dwarf[9], real_dwarf[7] = {0,}, tall = 0, fake_num1, fake_num2, count = 0;
+	int dwarf[9], tall = 0, count = 0;
 	for (int i = 0; i < 9; i++) {
 		scanf("%d", &dwarf[i]);
 		tall += dwarf[i];
 	}
 
+	heap_sort(dwarf, 9);
+	for (int i = 8; i >= 0; i--) {
+		int temp = dwarf[0];
+		dwarf[0] = dwarf[i];
+		dwarf[i] = temp;
+		heap_sort(dwarf, i);
+	}
+
 	for (int i = 0; i < 9; i++) {
 		for (int j = i + 1; j < 9; j++) {
 			if ((tall - (dwarf[i] + dwarf[j])) == 100) {
-				fake_num1 = i;
-				fake_num2 = j;
+				for (int z = 0; z < 9; z++) {
+					if (z != i && z != j) printf("%d\n", dwarf[z]);
+				}
 			}
 		}
 	}
-	for (int i = 0; i < 9; i++) {
-		if (i != fake_num1 && i != fake_num2) real_dwarf[count++] = dwarf[i];
-	}
-	heap_sort(real_dwarf, 7);
-	for (int i = 6; i >= 0; i--) {
-		int temp = real_dwarf[0];
-		real_dwarf[0] = real_dwarf[i];
-		real_dwarf[i] = temp;
-		heap_sort(real_dwarf, i);
-	}
-	for (int i = 0; i < 7; i++) printf("%d\n", real_dwarf[i]);
+
 	return 0;
 }
