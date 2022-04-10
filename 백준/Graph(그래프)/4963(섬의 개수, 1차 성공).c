@@ -52,7 +52,7 @@ void bfs(QueueType* Q, int visit[MAX][MAX], int x, int y) {
     while (Q->front != Q->rear) {
         Cd = DeQueue(Q);
         for (int i = 0; i < 8; i++) {
-            if ((Cd.x + dx[i] < 0) || (Cd.x + dx[i] >= w) || (Cd.y + dy[i] < 0) || (Cd.y + dy[i] >= h)) continue;
+            if ((Cd.x + dx[i] < 0) || (Cd.x + dx[i] >= h) || (Cd.y + dy[i] < 0) || (Cd.y + dy[i] >= w)) continue;
             if (map[Cd.x + dx[i]][Cd.y + dy[i]] && !visit[Cd.x + dx[i]][Cd.y + dy[i]]) {
                 EnQueue(Q, Cd.x + dx[i], Cd.y + dy[i]);
                 visit[Cd.x + dx[i]][Cd.y + dy[i]] = 1;
@@ -77,8 +77,8 @@ int main() {
             }
         }
 
-        for (int i = 0; i < w; i++) {
-            for (int j = 0; j < h; j++) {
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
                 if (map[i][j] == 1 && !check[i][j]) { //방문 안 했고 육지인 경우에만 
                     bfs(QT, check, i, j);
                     count++;
